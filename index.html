@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Shenghan Zhou is an M.S. student in Transportation at Shanghai Maritime University, researching complex networks, multimodal transport systems, and maritime transport policy.">
+    <meta name="theme-color" content="#f5f7fa">
     <title>Shenghan Zhou's homepage</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2314477f'/%3E%3Ctext x='32' y='43' font-size='30' fill='%23ffffff' text-anchor='middle' font-family='sans-serif'%3E%E5%91%A8%3C/text%3E%3C/svg%3E">
 
@@ -16,11 +17,40 @@
             --bg: #f5f7fa;
             --card: #ffffff;
             --border: #e9edf2;
+            --line: #f1f3f6;
             --text: #212529;
+            --text-2: #343a40;
+            --text-3: #495057;
             --muted: #6c757d;
             --link: #0d6efd;
             --navy: #14477f;
+            --accent: #14477f;
             --soft: #eef3fb;
+            --accent-border: #dbe6f5;
+            --icon-bg: #fbfcfe;
+            --dot: #b9c9e2;
+            --shadow: 0 1px 4px rgba(20, 40, 80, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.94);
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0f1720;
+            --card: #182132;
+            --border: #2a3548;
+            --line: #212c3e;
+            --text: #e6ebf2;
+            --text-2: #c6cfdb;
+            --text-3: #9aa7b8;
+            --muted: #8b98ab;
+            --link: #6ea8fe;
+            --navy: #14477f;
+            --accent: #8ab4f8;
+            --soft: #1d2a3f;
+            --accent-border: #2e4a75;
+            --icon-bg: #1c2736;
+            --dot: #3d5573;
+            --shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            --nav-bg: rgba(13, 19, 28, 0.92);
         }
 
         * { box-sizing: border-box; }
@@ -34,7 +64,10 @@
             color: var(--text);
             line-height: 1.55;
             padding-top: 56px;
+            transition: background-color .25s ease, color .25s ease;
         }
+
+        [id] { scroll-margin-top: 74px; }
 
         a { color: var(--link); text-decoration: none; }
         a:hover { text-decoration: underline; }
@@ -45,9 +78,10 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             height: 56px;
-            background: rgba(255, 255, 255, 0.94);
+            background: var(--nav-bg);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
+            transition: background-color .25s ease, border-color .25s ease;
         }
         .navbar-inner {
             max-width: 1140px;
@@ -69,37 +103,46 @@
             margin: 0;
             padding: 0;
         }
-        .nav-links a { color: #343a40; font-size: .95rem; padding: 4px 0; }
+        .nav-links a { color: var(--text-2); font-size: .95rem; padding: 4px 0; }
         .nav-links a:hover { color: var(--link); text-decoration: none; }
         .nav-links .active a { color: var(--link); font-weight: 700; }
         .nav-toggler {
             display: none;
             background: none;
-            border: 1px solid #d7dde4;
+            border: 1px solid var(--border);
             border-radius: 6px;
             padding: 6px 10px;
             cursor: pointer;
-            color: #343a40;
+            color: var(--text-2);
         }
-        .lang-switch {
+        .nav-pill {
             font-size: .85rem;
             font-weight: 700;
-            color: var(--navy);
+            color: var(--accent);
             background: var(--soft);
-            border: 1px solid #dbe6f5;
+            border: 1px solid var(--accent-border);
             border-radius: 999px;
             padding: 4px 12px;
             white-space: nowrap;
             margin-left: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .lang-switch:hover { background: var(--navy); color: #fff; text-decoration: none; }
+        .nav-pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
+        .theme-toggle { font-family: inherit; line-height: 1; }
+        .theme-toggle svg { width: 14px; height: 14px; }
+        .theme-toggle .icon-sun { display: none; }
+        :root[data-theme="dark"] .theme-toggle .icon-sun { display: inline-flex; }
+        :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
         @media (max-width: 767px) {
             .nav-toggler { display: inline-flex; }
             .nav-links {
                 display: none;
                 position: absolute;
                 top: 56px; left: 0; right: 0;
-                background: #fff;
+                background: var(--card);
                 border-bottom: 1px solid var(--border);
                 flex-direction: column;
                 align-items: flex-start;
@@ -122,7 +165,8 @@
         .card {
             background: var(--card);
             border-radius: 14px;
-            box-shadow: 0 1px 4px rgba(20, 40, 80, 0.08);
+            box-shadow: var(--shadow);
+            transition: background-color .25s ease, box-shadow .25s ease;
         }
 
         /* ===== Profile card ===== */
@@ -143,10 +187,12 @@
         }
         .profile-name { text-align: center; font-size: 1.35rem; font-weight: 900; margin: 0; }
         .profile-name-cn { text-align: center; font-size: .95rem; color: var(--muted); margin: 2px 0 12px; }
-        .profile-line { text-align: center; font-size: .92rem; color: #343a40; margin: 0 0 2px; }
+        .profile-line { text-align: center; font-size: .92rem; color: var(--text-2); margin: 0 0 2px; }
         .profile-school { text-align: center; font-size: .92rem; color: var(--muted); margin: 0 0 10px; }
+        .profile-school a { color: var(--muted); }
+        .profile-school a:hover { color: var(--link); }
         .profile-email { text-align: center; font-size: .9rem; margin: 0; }
-        .profile-email a { color: #343a40; }
+        .profile-email a { color: var(--text-2); }
         .profile-email a:hover { color: var(--link); }
         .social-row { display: flex; justify-content: center; gap: 12px; margin-top: 14px; }
         .social-row a, .social-row span {
@@ -155,9 +201,10 @@
             justify-content: center;
             width: 36px; height: 36px;
             border-radius: 8px;
-            color: #495057;
+            color: var(--text-3);
             border: 1px solid var(--border);
-            background: #fbfcfe;
+            background: var(--icon-bg);
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
         }
         .social-row a:hover { color: #fff; background: var(--navy); border-color: var(--navy); text-decoration: none; }
         .social-row svg { width: 16px; height: 16px; }
@@ -174,17 +221,19 @@
 
         /* ===== News ===== */
         .news-list { list-style: none; margin: 0; padding: 6px 0; }
-        .news-list li { padding: 9px 0; border-bottom: 1px solid #f1f3f6; font-size: .95rem; }
+        .news-list li { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
         .news-list li:last-child { border-bottom: none; }
-        .news-date { font-weight: 700; color: var(--navy); margin-right: 8px; white-space: nowrap; }
+        .news-date { font-weight: 700; color: var(--accent); margin-right: 8px; white-space: nowrap; }
 
         /* ===== Publication ===== */
         .pub-item { display: flex; gap: 18px; padding: 18px 22px; }
-        .pub-thumb { width: 210px; flex-shrink: 0; border-radius: 8px; object-fit: cover; aspect-ratio: 3 / 2; border: 1px solid var(--border); }
+        .pub-thumb-link { display: block; flex-shrink: 0; line-height: 0; }
+        .pub-thumb-link:hover { opacity: .88; }
+        .pub-thumb { width: 210px; border-radius: 8px; object-fit: cover; aspect-ratio: 3 / 2; border: 1px solid var(--border); }
         .pub-title { font-size: 1.04rem; font-weight: 700; margin: 0 0 6px; line-height: 1.4; }
-        .pub-authors { font-size: .93rem; color: #343a40; margin: 0 0 6px; }
+        .pub-authors { font-size: .93rem; color: var(--text-2); margin: 0 0 6px; }
         .pub-venue { font-size: .9rem; color: var(--muted); margin: 0 0 4px; }
-        .pub-flag { display: inline-block; font-size: .78rem; font-weight: 700; color: var(--navy); background: var(--soft); border: 1px solid #dbe6f5; border-radius: 999px; padding: 2px 10px; margin-bottom: 10px; }
+        .pub-flag { display: inline-block; font-size: .78rem; font-weight: 700; color: var(--accent); background: var(--soft); border: 1px solid var(--accent-border); border-radius: 999px; padding: 2px 10px; margin-bottom: 10px; }
         .pub-links a { font-size: .88rem; margin-right: 14px; }
         @media (max-width: 640px) {
             .pub-item { flex-direction: column; }
@@ -197,9 +246,9 @@
         .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
         .proj-title { font-weight: 700; font-size: .98rem; }
         .proj-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .proj-role { font-size: .78rem; font-weight: 700; color: var(--navy); background: var(--soft); border: 1px solid #dbe6f5; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+        .proj-role { font-size: .78rem; font-weight: 700; color: var(--accent); background: var(--soft); border: 1px solid var(--accent-border); border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
         .proj-date { font-style: italic; color: var(--muted); font-size: .88rem; white-space: nowrap; }
-        .proj-desc { margin: 8px 0 0; font-size: .92rem; color: #343a40; }
+        .proj-desc { margin: 8px 0 0; font-size: .92rem; color: var(--text-2); }
 
         /* ===== Education / Experience ===== */
         .edu-item { padding: 16px 22px; border-top: 1px solid var(--border); }
@@ -209,7 +258,7 @@
         .logo-badge {
             width: 50px; height: 50px;
             border-radius: 50%;
-            background: var(--navy);
+            background: linear-gradient(135deg, #1b5fa8, #0f3a70);
             color: #fff;
             display: flex;
             align-items: center;
@@ -220,17 +269,19 @@
             flex-shrink: 0;
         }
         .edu-school { font-weight: 700; font-size: .98rem; }
+        .edu-school a { color: inherit; }
+        .edu-school a:hover { color: var(--link); }
         .edu-date { font-style: italic; color: var(--muted); font-size: .9rem; white-space: nowrap; }
-        .edu-detail { margin-top: 6px; color: #495057; font-size: .9rem; }
+        .edu-detail { margin-top: 6px; color: var(--text-3); font-size: .9rem; }
         .exp-list { list-style: none; margin: 8px 0 0; padding: 0; }
-        .exp-list li { font-size: .9rem; color: #495057; padding: 5px 0 5px 18px; position: relative; }
+        .exp-list li { font-size: .9rem; color: var(--text-3); padding: 5px 0 5px 18px; position: relative; }
         .exp-list li::before {
             content: "";
             position: absolute;
             left: 2px; top: 13px;
             width: 6px; height: 6px;
             border-radius: 50%;
-            background: #b9c9e2;
+            background: var(--dot);
         }
 
         /* ===== Honors & Skills ===== */
@@ -238,18 +289,18 @@
         @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
         .sub-heading { font-size: .85rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); margin: 14px 0 4px; }
         .honor-list { list-style: none; margin: 0; padding: 0; }
-        .honor-list li { padding: 6px 0; border-bottom: 1px solid #f1f3f6; font-size: .92rem; }
+        .honor-list li { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
         .honor-list li:last-child { border-bottom: none; }
         .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
         .tag {
             font-size: .84rem;
-            color: #2c4a6e;
+            color: var(--accent);
             background: var(--soft);
-            border: 1px solid #dbe6f5;
+            border: 1px solid var(--accent-border);
             border-radius: 999px;
             padding: 4px 12px;
         }
-        .skill-note { font-size: .9rem; color: #495057; margin: 10px 0 0; }
+        .skill-note { font-size: .9rem; color: var(--text-3); margin: 10px 0 0; }
 
         /* ===== Interests ===== */
         .interest-list { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 0; padding: 14px 22px 18px; }
@@ -259,9 +310,9 @@
             gap: 8px;
             font-size: .92rem;
             font-weight: 600;
-            color: var(--navy);
+            color: var(--accent);
             background: var(--soft);
-            border: 1px solid #dbe6f5;
+            border: 1px solid var(--accent-border);
             border-radius: 999px;
             padding: 8px 16px;
         }
@@ -281,6 +332,11 @@
         }
         .footer a { color: var(--muted); }
         .footer a:hover { color: var(--link); }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -303,7 +359,23 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
             </ul>
-            <a class="lang-switch" href="index-cn.html" title="切换到中文版">中文</a>
+            <button class="nav-pill theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" aria-pressed="false">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+            <a class="nav-pill lang-switch" href="index-cn.html" title="切换到中文版">中文</a>
         </div>
     </nav>
 
@@ -319,7 +391,9 @@
                     <div class="profile-name">Shenghan Zhou</div>
                     <div class="profile-name-cn">周圣寒</div>
                     <p class="profile-line">M.S. Student in Transportation</p>
-                    <p class="profile-school">Shanghai Maritime University</p>
+                    <p class="profile-school">
+                        <a href="https://en.shmtu.edu.cn/" target="_blank" rel="noopener">Shanghai Maritime University</a>
+                    </p>
                     <p class="profile-email">
                         <a href="mailto:1601347003@qq.com">1601347003@qq.com</a>
                     </p>
@@ -328,6 +402,11 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                                 <path d="M22 6l-10 7L2 6"></path>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/zsh1601347003-cmd" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"></path>
                             </svg>
                         </a>
                         <a href="tel:+8618096330612" aria-label="Phone" title="Phone: 18096330612">
@@ -361,7 +440,8 @@
                         <p>
                             My recent work applies network science and policy evaluation methods to multimodal transport,
                             including a PMC index analysis of China&rsquo;s multimodal transport policies published in
-                            <i>Regional Studies in Marine Science</i> (2026). I have also interned at the
+                            <a href="https://www.sciencedirect.com/journal/regional-studies-in-marine-science" target="_blank" rel="noopener"><i>Regional Studies in Marine Science</i></a> (2026).
+                            I have also interned at the
                             <a href="https://www.sse.net.cn/" target="_blank" rel="noopener">Shanghai Shipping Exchange</a> (Market Department),
                             working on liner freight rate filing review and shipping market data analysis.
                         </p>
@@ -383,7 +463,11 @@
                         <li>
                             <span class="news-date">[Jun. 2026]</span>
                             Our paper &ldquo;Unraveling China&rsquo;s Multimodal Transport Policies: The PMC Index Perspective&rdquo; was published in
-                            <i>Regional Studies in Marine Science</i> (SCI).
+                            <a href="https://www.sciencedirect.com/journal/regional-studies-in-marine-science" target="_blank" rel="noopener"><i>Regional Studies in Marine Science</i></a> (SCI).
+                        </li>
+                        <li>
+                            <span class="news-date">[2026]</span>
+                            Finished 4th as a team in the SMU &ldquo;Maritime Cup&rdquo; campus basketball tournament.
                         </li>
                         <li>
                             <span class="news-date">[Sep. 2025]</span>
@@ -400,7 +484,9 @@
                 <section class="card content-card" id="publications" aria-label="Publications">
                     <h2 class="card-title">Publications</h2>
                     <div class="pub-item">
-                        <img class="pub-thumb" src="https://aka.doubaocdn.com/s/ab3QTTzlFr" alt="Cover illustration for Unraveling China's Multimodal Transport Policies" loading="lazy">
+                        <a class="pub-thumb-link" href="https://doi.org/10.1016/j.rsma.2026.105063" target="_blank" rel="noopener" aria-label="Open paper: Unraveling China's Multimodal Transport Policies">
+                            <img class="pub-thumb" src="https://aka.doubaocdn.com/s/ab3QTTzlFr" alt="Cover illustration for Unraveling China's Multimodal Transport Policies" loading="lazy">
+                        </a>
                         <div>
                             <h3 class="pub-title">Unraveling China&rsquo;s Multimodal Transport Policies: The PMC Index Perspective</h3>
                             <p class="pub-authors">Jiawei Ge, <strong>Shenghan Zhou</strong>, Xiang Li, Yiying Chao</p>
@@ -483,6 +569,22 @@
                             <div class="edu-left">
                                 <div class="logo-badge" aria-hidden="true">SMU</div>
                                 <div>
+                                    <div class="edu-school">SMU &ldquo;Maritime Cup&rdquo; Campus Basketball Tournament</div>
+                                    <div class="edu-detail">Team Member &middot; 4th Place</div>
+                                </div>
+                            </div>
+                            <div class="edu-date"><em>2026</em></div>
+                        </div>
+                        <ul class="exp-list">
+                            <li>Represented the college in the Shanghai Maritime University &ldquo;Maritime Cup&rdquo; campus basketball tournament and finished 4th as a team.</li>
+                        </ul>
+                    </div>
+
+                    <div class="edu-item">
+                        <div class="edu-head">
+                            <div class="edu-left">
+                                <div class="logo-badge" aria-hidden="true">SMU</div>
+                                <div>
                                     <div class="edu-school">Shanghai Maritime University</div>
                                     <div class="edu-detail">Class League Secretary (Youth League Branch)</div>
                                 </div>
@@ -520,7 +622,7 @@
                             <div class="edu-left">
                                 <div class="logo-badge" aria-hidden="true">SMU</div>
                                 <div>
-                                    <div class="edu-school">Shanghai Maritime University</div>
+                                    <div class="edu-school"><a href="https://en.shmtu.edu.cn/" target="_blank" rel="noopener">Shanghai Maritime University</a></div>
                                     <div class="edu-detail">College of Transport &amp; Communications &middot; M.S. in Transportation</div>
                                 </div>
                             </div>
@@ -533,7 +635,7 @@
                             <div class="edu-left">
                                 <div class="logo-badge" aria-hidden="true">SMU</div>
                                 <div>
-                                    <div class="edu-school">Shanghai Maritime University</div>
+                                    <div class="edu-school"><a href="https://en.shmtu.edu.cn/" target="_blank" rel="noopener">Shanghai Maritime University</a></div>
                                     <div class="edu-detail">B.S. in Transportation Management &middot; GPA 3.59/4</div>
                                 </div>
                             </div>
@@ -641,6 +743,28 @@
                         links.classList.remove("open");
                         toggler.setAttribute("aria-expanded", "false");
                     });
+                });
+            }
+
+            var themeBtn = document.getElementById("themeToggle");
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (themeBtn) {
+                var root = document.documentElement;
+                var saved = null;
+                try { saved = localStorage.getItem("theme"); } catch (e) {}
+                var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                var theme = saved || (prefersDark ? "dark" : "light");
+
+                function applyTheme(t) {
+                    root.setAttribute("data-theme", t);
+                    themeBtn.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
+                    if (meta) { meta.setAttribute("content", t === "dark" ? "#0f1720" : "#f5f7fa"); }
+                    try { localStorage.setItem("theme", t); } catch (e) {}
+                }
+
+                applyTheme(theme);
+                themeBtn.addEventListener("click", function () {
+                    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
                 });
             }
         });
